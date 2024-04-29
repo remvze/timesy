@@ -40,6 +40,7 @@
     "eslint-plugin-sort-destructure-keys": "2.0.0",
     "eslint-plugin-sort-keys-fix": "1.1.2",
     "eslint-plugin-typescript-sort-keys": "3.2.0",
+    "lint-staged": "15.2.2",
     "postcss-html": "1.6.0",
     "prettier": "3.2.5",
     "prettier-plugin-astro": "0.13.0",
