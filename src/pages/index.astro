@@ -2,8 +2,10 @@
 import Layout from '@/layouts/Layout.astro';
 
 import { Hero } from '@/components/hero';
+import { App } from '@/components/app';
 ---
 
 <Layout title="Welcome to Astro.">
   <Hero />
+  <App client:load />
 </Layout>

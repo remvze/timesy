@@ -1,0 +1,127 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+
+  & .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 45px;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: var(--color-neutral-950);
+    border: none;
+    border-radius: 8px;
+    outline: none;
+  }
+}
+
+.timeFields {
+  display: flex;
+  column-gap: 12px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.timers {
+  margin-top: 48px;
+
+  & .title {
+    margin-bottom: 16px;
+    font-family: var(--font-display);
+    font-size: var(--font-lg);
+  }
+}
+
+.field {
+  flex-grow: 1;
+
+  & .label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: var(--font-sm);
+    font-weight: 500;
+
+    & .optional {
+      font-weight: 400;
+      color: var(--color-foreground-subtle);
+    }
+  }
+
+  & .input {
+    width: 100%;
+    min-width: 0;
+    height: 40px;
+    padding: 0 16px;
+    color: var(--color-foreground);
+    background-color: var(--color-neutral-100);
+    border: 1px solid var(--color-neutral-200);
+    border-radius: 8px;
+    outline: none;
+  }
+}
+
+.timer {
+  padding: 8px;
+  background-color: var(--color-neutral-100);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: 8px;
+
+  &:not(:last-of-type) {
+    margin-bottom: 24px;
+  }
+
+  & .header {
+    display: flex;
+    align-items: center;
+
+    & .control {
+      display: flex;
+      flex-grow: 1;
+      align-items: center;
+      height: 40px;
+      padding: 4px;
+      background-color: var(--color-neutral-50);
+      border: 1px solid var(--color-neutral-200);
+      border-radius: 4px;
+
+      & .input {
+        flex-grow: 1;
+        min-width: 0;
+        height: 100%;
+        padding: 0 8px;
+        color: var(--color-foreground-subtle);
+        background-color: transparent;
+        border: none;
+        border-radius: 4px;
+        outline: none;
+      }
+
+      & .button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        aspect-ratio: 1 / 1;
+        color: var(--color-foreground);
+        cursor: pointer;
+        background-color: var(--color-neutral-200);
+        border: none;
+        border-radius: 1px;
+        outline: none;
+      }
+    }
+  }
+
+  & .left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    font-family: var(--font-mono);
+    font-size: var(--font-2xlg);
+    font-weight: 700;
+  }
+}
