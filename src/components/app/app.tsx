@@ -111,7 +111,11 @@ export function App() {
 
         {timers.length > 0 && (
           <div className={styles.timers}>
-            <h2 className={styles.title}>Timers</h2>
+            <header>
+              <h2 className={styles.title}>Timers</h2>
+              <div className={styles.line} />
+            </header>
+
             {timers.map(timer => (
               <Timer
                 key={timer.id}
