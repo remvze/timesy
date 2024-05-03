@@ -9,6 +9,7 @@ interface Timer {
 }
 
 interface State {
+  spent: () => number;
   timers: Array<Timer>;
   total: () => number;
 }
@@ -67,6 +68,10 @@ export const useTimers = create<State & Actions>()((set, get) => ({
     }));
   },
 
+  spent() {
+    return get().timers.reduce((prev, curr) => prev + curr.spent, 0);
+  },
+
   tick(id) {
     set(state => ({
       timers: state.timers.map(timer => {
@@ -80,6 +85,6 @@ export const useTimers = create<State & Actions>()((set, get) => ({
   timers: [],
 
   total() {
-    return get().timers.reduce((prev, curr) => prev + curr.spent, 0);
+    return get().timers.reduce((prev, curr) => prev + curr.total, 0);
   },
 }));
