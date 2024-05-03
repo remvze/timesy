@@ -83,6 +83,7 @@
 }
 
 .timer {
+  position: relative;
   padding: 8px;
   overflow: hidden;
   background-color: var(--color-neutral-100);
@@ -204,4 +205,13 @@
       color: var(--color-foreground-subtle);
     }
   }
+}
+
+.reverseTimer {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  font-size: var(--font-xsm);
+  color: var(--color-foreground-subtle);
+  transform: translate(-50%);
 }

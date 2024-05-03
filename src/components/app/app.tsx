@@ -206,6 +206,8 @@ function Timer({ id }: TimerProps) {
         </div>
       </header>
 
+      <ReverseTimer spent={spent} />
+
       <div className={styles.left}>
         {padNumber(hours)}
         <span>:</span>
@@ -245,6 +247,22 @@ function Timer({ id }: TimerProps) {
           <IoTrashOutline />
         </button>
       </footer>
+    </div>
+  );
+}
+
+interface ReverseTimerProps {
+  spent: number;
+}
+
+function ReverseTimer({ spent }: ReverseTimerProps) {
+  const hours = useMemo(() => Math.floor(spent / 3600), [spent]);
+  const minutes = useMemo(() => Math.floor((spent % 3600) / 60), [spent]);
+  const seconds = useMemo(() => spent % 60, [spent]);
+
+  return (
+    <div className={styles.reverseTimer}>
+      -{padNumber(hours)}:{padNumber(minutes)}:{padNumber(seconds)}
     </div>
   );
 }
