@@ -1,9 +1,10 @@
-import { useState, useMemo } from 'react';
-import { IoPlay } from 'react-icons/io5';
+import { useState, useMemo, useEffect, useRef } from 'react';
+import { IoPlay, IoPause } from 'react-icons/io5';
 
 import { Container } from '@/components/container';
 
 import { padNumber } from '@/helpers/number';
+import { useTimers } from '@/stores/timers';
 
 import styles from './app.module.css';
 
@@ -25,22 +26,18 @@ export function App() {
     [hours, minutes, seconds],
   );
 
-  const [timers, setTimers] = useState<Array<Timer>>([]);
+  const timers = useTimers(state => state.timers);
+  const add = useTimers(state => state.add);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (totalSeconds === 0) return;
 
-    setTimers(prev => [
-      {
-        id: Math.random().toString(),
-        name,
-        spent: 0,
-        total: totalSeconds,
-      },
-      ...prev,
-    ]);
+    add({
+      name,
+      total: totalSeconds,
+    });
 
     setName('');
   };
@@ -117,12 +114,7 @@ export function App() {
             </header>
 
             {timers.map(timer => (
-              <Timer
-                key={timer.id}
-                name={timer.name}
-                spent={timer.spent}
-                total={timer.total}
-              />
+              <Timer id={timer.id} key={timer.id} />
             ))}
           </div>
         )}
@@ -132,32 +124,86 @@ export function App() {
 }
 
 interface TimerProps {
-  name: string;
-  spent: number;
-  total: number;
+  id: string;
 }
 
-function Timer({ name, spent, total }: TimerProps) {
+function Timer({ id }: TimerProps) {
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const [isRunning, setIsRunning] = useState(false);
+
+  const { name, spent, total } = useTimers(state => state.getTimer(id));
+  const tick = useTimers(state => state.tick);
+
   const left = useMemo(() => total - spent, [total, spent]);
 
   const hours = useMemo(() => Math.floor(left / 3600), [left]);
   const minutes = useMemo(() => Math.floor((left % 3600) / 60), [left]);
   const seconds = useMemo(() => left % 60, [left]);
 
+  const handleStart = () => {
+    if (left > 0) setIsRunning(true);
+  };
+
+  const handlePause = () => setIsRunning(false);
+
+  const handleToggle = () => {
+    if (isRunning) handlePause();
+    else handleStart();
+  };
+
+  useEffect(() => {
+    if (isRunning) {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+
+      intervalRef.current = setInterval(() => tick(id), 1000);
+    }
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [isRunning, tick, id]);
+
+  useEffect(() => {
+    if (left === 0 && isRunning) {
+      setIsRunning(false);
+
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    }
+  }, [left, isRunning]);
+
   return (
     <div className={styles.timer}>
       <header className={styles.header}>
-        <div className={styles.control}>
-          <input className={styles.input} type="text" value={name} />
-          <button className={styles.button}>
-            <IoPlay />
-          </button>
+        <div className={styles.bar}>
+          <div
+            className={styles.completed}
+            style={{ width: `${(left / total) * 100}%` }}
+          />
         </div>
       </header>
 
       <div className={styles.left}>
-        {padNumber(hours)}:{padNumber(minutes)}:{padNumber(seconds)}
+        {padNumber(hours)}
+        <span>:</span>
+        {padNumber(minutes)}
+        <span>:</span>
+        {padNumber(seconds)}
       </div>
+
+      <footer className={styles.footer}>
+        <div className={styles.control}>
+          <input
+            className={styles.input}
+            placeholder="Untitled"
+            type="text"
+            value={name}
+          />
+          <button className={styles.button} onClick={handleToggle}>
+            {isRunning ? <IoPause /> : <IoPlay />}
+          </button>
+        </div>
+      </footer>
     </div>
   );
 }

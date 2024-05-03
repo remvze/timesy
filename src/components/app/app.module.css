@@ -78,6 +78,7 @@
 
 .timer {
   padding: 8px;
+  overflow: hidden;
   background-color: var(--color-neutral-100);
   border: 1px solid var(--color-neutral-200);
   border-radius: 8px;
@@ -87,6 +88,25 @@
   }
 
   & .header {
+    position: relative;
+    top: -8px;
+    width: 100%;
+
+    & .bar {
+      height: 3px;
+      margin: 0 -8px;
+      border-bottom: 1px solid var(--color-neutral-200);
+
+      & .completed {
+        height: 100%;
+        background-color: var(--color-neutral-500);
+        transition: 1s;
+        transition-timing-function: linear;
+      }
+    }
+  }
+
+  & .footer {
     display: flex;
     align-items: center;
 
@@ -102,6 +122,7 @@
 
       & .input {
         flex-grow: 1;
+        width: 100%;
         min-width: 0;
         height: 100%;
         padding: 0 8px;
@@ -136,5 +157,9 @@
     font-family: var(--font-mono);
     font-size: var(--font-2xlg);
     font-weight: 700;
+
+    & span {
+      color: var(--color-foreground-subtle);
+    }
   }
 }
