@@ -6,17 +6,9 @@ export function Hero() {
   return (
     <div className={styles.hero}>
       <Container>
-        <div className={styles.titleContainer}>
-          <img
-            alt="Timesy Logo"
-            className={styles.logo}
-            height={35}
-            src="/logo.svg"
-            width={30.31}
-          />
+        <img alt="Timesy Logo" className={styles.logo} src="/logo.svg" />
 
-          <h1 className={styles.title}>Timesy</h1>
-        </div>
+        <h1 className={styles.title}>Timesy</h1>
         <p className={styles.desc}>A distraction-free online timer.</p>
       </Container>
     </div>

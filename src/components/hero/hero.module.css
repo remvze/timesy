@@ -3,26 +3,21 @@
   margin-bottom: 50px;
   text-align: center;
 
-  .titleContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  & .logo {
+    display: block;
+    height: 45px;
+    margin: 0 auto;
+    margin-bottom: 12px;
+  }
 
-    & .logo {
-      width: 30.31;
-      height: 35px;
-      margin-right: 8px;
-    }
-
-    & .title {
-      font-family: var(--font-display);
-      font-size: var(--font-xlg);
-      font-weight: 400;
-    }
+  & .title {
+    font-family: var(--font-display);
+    font-size: var(--font-2xlg);
+    font-weight: 400;
   }
 
   & .desc {
-    margin-top: 12px;
+    margin-top: 8px;
     color: var(--color-foreground-subtle);
   }
 }
