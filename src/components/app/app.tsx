@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
-import { IoPlay, IoPause, IoRefresh } from 'react-icons/io5';
+import { IoPlay, IoPause, IoRefresh, IoTrashOutline } from 'react-icons/io5';
 
 import { Container } from '@/components/container';
 
@@ -137,6 +137,7 @@ function Timer({ id }: TimerProps) {
   const tick = useTimers(state => state.tick);
   const rename = useTimers(state => state.rename);
   const reset = useTimers(state => state.reset);
+  const deleteTimer = useTimers(state => state.delete);
 
   const left = useMemo(() => total - spent, [total, spent]);
 
@@ -156,8 +157,16 @@ function Timer({ id }: TimerProps) {
   };
 
   const handleReset = () => {
-    setIsRunning(false);
-    reset(id);
+    if (confirm('Are you sure you want to reset this timer?')) {
+      setIsRunning(false);
+      reset(id);
+    }
+  };
+
+  const handleDelete = () => {
+    if (confirm('Are you sure you want to delete this timer?')) {
+      deleteTimer(id);
+    }
   };
 
   useEffect(() => {
@@ -221,6 +230,14 @@ function Timer({ id }: TimerProps) {
             {isRunning ? <IoPause /> : <IoPlay />}
           </button>
         </div>
+
+        <button
+          className={styles.delete}
+          disabled={isRunning}
+          onClick={handleDelete}
+        >
+          <IoTrashOutline />
+        </button>
       </footer>
     </div>
   );
