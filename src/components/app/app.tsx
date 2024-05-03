@@ -6,6 +6,8 @@ import { Container } from '@/components/container';
 import { padNumber } from '@/helpers/number';
 import { useTimers } from '@/stores/timers';
 import { cn } from '@/helpers/styles';
+import { useSound } from '@/hooks/use-sound';
+import { useAlarmStore } from '@/stores/alarm';
 
 import styles from './app.module.css';
 
@@ -51,7 +53,7 @@ export function App() {
       <Container>
         <form className={styles.form} onSubmit={handleSubmit}>
           <Field
-            label="Session Name"
+            label="Timer Name"
             optional
             type="text"
             value={name}
@@ -151,6 +153,11 @@ function Timer({ id }: TimerProps) {
   const minutes = useMemo(() => Math.floor((left % 3600) / 60), [left]);
   const seconds = useMemo(() => left % 60, [left]);
 
+  const { play } = useSound('/sounds/alarm.mp3', 1);
+  const isPlaying = useAlarmStore(state => state.isPlaying);
+  const playAlarm = useAlarmStore(state => state.play);
+  const stopAlarm = useAlarmStore(state => state.stop);
+
   const handleStart = () => {
     if (left > 0) setIsRunning(true);
   };
@@ -191,9 +198,14 @@ function Timer({ id }: TimerProps) {
     if (left === 0 && isRunning) {
       setIsRunning(false);
 
+      if (!isPlaying) {
+        play(stopAlarm);
+        playAlarm();
+      }
+
       if (intervalRef.current) clearInterval(intervalRef.current);
     }
-  }, [left, isRunning]);
+  }, [left, isRunning, play, playAlarm, isPlaying, stopAlarm]);
 
   return (
     <div className={styles.timer}>
