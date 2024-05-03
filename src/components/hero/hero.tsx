@@ -7,7 +7,7 @@ export function Hero() {
     <div className={styles.hero}>
       <Container>
         <h1 className={styles.title}>Timesy</h1>
-        <p className={styles.desc}>Simple, distraction-free timer.</p>
+        <p className={styles.desc}>A distraction-free online timer.</p>
       </Container>
     </div>
   );
