@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
-import { IoPlay, IoPause } from 'react-icons/io5';
+import { IoPlay, IoPause, IoRefresh } from 'react-icons/io5';
 
 import { Container } from '@/components/container';
 
@@ -136,6 +136,7 @@ function Timer({ id }: TimerProps) {
   const { name, spent, total } = useTimers(state => state.getTimer(id));
   const tick = useTimers(state => state.tick);
   const rename = useTimers(state => state.rename);
+  const reset = useTimers(state => state.reset);
 
   const left = useMemo(() => total - spent, [total, spent]);
 
@@ -152,6 +153,11 @@ function Timer({ id }: TimerProps) {
   const handleToggle = () => {
     if (isRunning) handlePause();
     else handleStart();
+  };
+
+  const handleReset = () => {
+    setIsRunning(false);
+    reset(id);
   };
 
   useEffect(() => {
@@ -202,6 +208,15 @@ function Timer({ id }: TimerProps) {
             value={name}
             onChange={e => rename(id, e.target.value)}
           />
+
+          <button
+            className={cn(styles.button, styles.reset)}
+            disabled={isRunning || spent === 0}
+            onClick={handleReset}
+          >
+            <IoRefresh />
+          </button>
+
           <button className={styles.button} onClick={handleToggle}>
             {isRunning ? <IoPause /> : <IoPlay />}
           </button>
