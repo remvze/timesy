@@ -15,6 +15,7 @@ interface State {
 interface Actions {
   add: (timer: { name: string; total: number }) => void;
   getTimer: (id: string) => Timer;
+  rename: (id: string, newName: string) => void;
   tick: (id: string) => void;
 }
 
@@ -36,6 +37,16 @@ export const useTimers = create<State & Actions>()((set, get) => ({
 
   getTimer(id) {
     return get().timers.filter(timer => timer.id === id)[0];
+  },
+
+  rename(id, newName) {
+    set(state => ({
+      timers: state.timers.map(timer => {
+        if (timer.id !== id) return timer;
+
+        return { ...timer, name: newName };
+      }),
+    }));
   },
 
   tick(id) {

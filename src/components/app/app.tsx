@@ -5,6 +5,7 @@ import { Container } from '@/components/container';
 
 import { padNumber } from '@/helpers/number';
 import { useTimers } from '@/stores/timers';
+import { cn } from '@/helpers/styles';
 
 import styles from './app.module.css';
 
@@ -134,6 +135,7 @@ function Timer({ id }: TimerProps) {
 
   const { name, spent, total } = useTimers(state => state.getTimer(id));
   const tick = useTimers(state => state.tick);
+  const rename = useTimers(state => state.rename);
 
   const left = useMemo(() => total - spent, [total, spent]);
 
@@ -194,10 +196,11 @@ function Timer({ id }: TimerProps) {
       <footer className={styles.footer}>
         <div className={styles.control}>
           <input
-            className={styles.input}
+            className={cn(styles.input, left === 0 && styles.finished)}
             placeholder="Untitled"
             type="text"
             value={name}
+            onChange={e => rename(id, e.target.value)}
           />
           <button className={styles.button} onClick={handleToggle}>
             {isRunning ? <IoPause /> : <IoPlay />}

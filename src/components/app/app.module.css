@@ -100,8 +100,7 @@
       & .completed {
         height: 100%;
         background-color: var(--color-neutral-500);
-        transition: 1s;
-        transition-timing-function: linear;
+        transition: 0.2s;
       }
     }
   }
@@ -131,6 +130,10 @@
         border: none;
         border-radius: 4px;
         outline: none;
+
+        &.finished {
+          text-decoration: line-through;
+        }
       }
 
       & .button {
