@@ -29,6 +29,9 @@ export function App() {
 
   const timers = useTimers(state => state.timers);
   const add = useTimers(state => state.add);
+  const total = useTimers(state => state.total());
+
+  const trackedMinutes = useMemo(() => Math.floor(total / 60), [total]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -112,6 +115,9 @@ export function App() {
             <header>
               <h2 className={styles.title}>Timers</h2>
               <div className={styles.line} />
+              <p className={styles.spent}>
+                {trackedMinutes} Minute{trackedMinutes !== 1 && 's'} Tracked
+              </p>
             </header>
 
             {timers.map(timer => (

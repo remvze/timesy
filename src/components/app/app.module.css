@@ -1,7 +1,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  row-gap: 32px;
+  row-gap: 28px;
 
   & .button {
     display: flex;
@@ -15,6 +15,7 @@
     border: none;
     border-radius: 8px;
     outline: none;
+    box-shadow: inset 0 -3px 0 var(--color-neutral-700);
   }
 }
 
@@ -44,6 +45,11 @@
       flex-grow: 1;
       height: 0;
       border-top: 1px dashed var(--color-neutral-200);
+    }
+
+    & .spent {
+      font-size: var(--font-sm);
+      color: var(--color-foreground-subtle);
     }
   }
 }

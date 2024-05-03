@@ -10,6 +10,7 @@ interface Timer {
 
 interface State {
   timers: Array<Timer>;
+  total: () => number;
 }
 
 interface Actions {
@@ -77,4 +78,8 @@ export const useTimers = create<State & Actions>()((set, get) => ({
   },
 
   timers: [],
+
+  total() {
+    return get().timers.reduce((prev, curr) => prev + curr.spent, 0);
+  },
 }));
