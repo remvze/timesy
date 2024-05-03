@@ -4,8 +4,7 @@ import { IoPlay, IoPause, IoRefresh, IoTrashOutline } from 'react-icons/io5';
 import { ReverseTimer } from './reverse-timer';
 
 import { useTimers } from '@/stores/timers';
-import { useSound } from '@/hooks/use-sound';
-import { useAlarmStore } from '@/stores/alarm';
+import { useAlarm } from '@/hooks/use-alarm';
 import { padNumber } from '@/helpers/number';
 import { cn } from '@/helpers/styles';
 
@@ -32,10 +31,7 @@ export function Timer({ id }: TimerProps) {
   const minutes = useMemo(() => Math.floor((left % 3600) / 60), [left]);
   const seconds = useMemo(() => left % 60, [left]);
 
-  const { play } = useSound('/sounds/alarm.mp3', 1);
-  const isPlaying = useAlarmStore(state => state.isPlaying);
-  const playAlarm = useAlarmStore(state => state.play);
-  const stopAlarm = useAlarmStore(state => state.stop);
+  const playAlarm = useAlarm();
 
   const handleStart = () => {
     if (left > 0) setIsRunning(true);
@@ -72,15 +68,11 @@ export function Timer({ id }: TimerProps) {
   useEffect(() => {
     if (left === 0 && isRunning) {
       setIsRunning(false);
-
-      if (!isPlaying) {
-        play(stopAlarm);
-        playAlarm();
-      }
+      playAlarm();
 
       if (intervalRef.current) clearInterval(intervalRef.current);
     }
-  }, [left, isRunning, play, playAlarm, isPlaying, stopAlarm]);
+  }, [left, isRunning, playAlarm]);
 
   return (
     <div className={styles.timer}>
