@@ -170,16 +170,12 @@ function Timer({ id }: TimerProps) {
   };
 
   const handleReset = () => {
-    if (confirm('Are you sure you want to reset this timer?')) {
-      setIsRunning(false);
-      reset(id);
-    }
+    setIsRunning(false);
+    reset(id);
   };
 
   const handleDelete = () => {
-    if (confirm('Are you sure you want to delete this timer?')) {
-      deleteTimer(id);
-    }
+    deleteTimer(id);
   };
 
   useEffect(() => {
