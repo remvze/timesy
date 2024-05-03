@@ -112,7 +112,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100px;
+    height: 120px;
     font-family: var(--font-mono);
     font-size: var(--font-2xlg);
     font-weight: 700;
