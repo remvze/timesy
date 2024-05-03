@@ -305,6 +305,7 @@ function Field({
 
       {type === 'text' && (
         <input
+          autoComplete="off"
           className={styles.input}
           id={label.toLowerCase()}
           type="text"
@@ -315,6 +316,7 @@ function Field({
 
       {type === 'select' && (
         <select
+          autoComplete="off"
           className={styles.input}
           id={label.toLowerCase()}
           value={value}
