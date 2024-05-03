@@ -113,7 +113,11 @@ export function Timer({ id }: TimerProps) {
             <IoRefresh />
           </button>
 
-          <button className={styles.button} onClick={handleToggle}>
+          <button
+            className={styles.button}
+            disabled={!isRunning && left === 0}
+            onClick={handleToggle}
+          >
             {isRunning ? <IoPause /> : <IoPlay />}
           </button>
         </div>
