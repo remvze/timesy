@@ -3,9 +3,11 @@ import Layout from '@/layouts/Layout.astro';
 
 import { Hero } from '@/components/hero';
 import { App } from '@/components/app';
+import { About } from '@/components/about';
 ---
 
 <Layout title="Welcome to Astro.">
   <Hero />
   <App client:load />
+  <About />
 </Layout>

@@ -1,0 +1,15 @@
+.about {
+  margin-top: 48px;
+
+  & .title {
+    margin-bottom: 12px;
+    font-family: var(--font-display);
+    font-size: var(--font-lg);
+    line-height: 1;
+  }
+
+  & .desc {
+    line-height: 1.65;
+    color: var(--color-foreground-subtle);
+  }
+}
