@@ -1,16 +1,15 @@
 import { Container } from '@/components/container';
 import { Form } from '@/components/form';
 import { Timers } from '@/components/timers';
-
-import styles from './app.module.css';
+import { StoreConsumer } from '@/components/store-consumer';
 
 export function App() {
   return (
-    <div className={styles.app}>
+    <StoreConsumer>
       <Container>
         <Form />
         <Timers />
       </Container>
-    </div>
+    </StoreConsumer>
   );
 }

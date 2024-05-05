@@ -1,5 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 interface Timer {
   id: string;
@@ -23,68 +24,79 @@ interface Actions {
   tick: (id: string) => void;
 }
 
-export const useTimers = create<State & Actions>()((set, get) => ({
-  add({ name, total }) {
-    set(state => ({
-      timers: [
-        {
-          id: uuid(),
-          name,
-          spent: 0,
-          total,
-        },
-        ...state.timers,
-      ],
-    }));
-  },
+export const useTimers = create<State & Actions>()(
+  persist(
+    (set, get) => ({
+      add({ name, total }) {
+        set(state => ({
+          timers: [
+            {
+              id: uuid(),
+              name,
+              spent: 0,
+              total,
+            },
+            ...state.timers,
+          ],
+        }));
+      },
 
-  delete(id) {
-    set(state => ({
-      timers: state.timers.filter(timer => timer.id !== id),
-    }));
-  },
+      delete(id) {
+        set(state => ({
+          timers: state.timers.filter(timer => timer.id !== id),
+        }));
+      },
 
-  getTimer(id) {
-    return get().timers.filter(timer => timer.id === id)[0];
-  },
+      getTimer(id) {
+        return get().timers.filter(timer => timer.id === id)[0];
+      },
 
-  rename(id, newName) {
-    set(state => ({
-      timers: state.timers.map(timer => {
-        if (timer.id !== id) return timer;
+      rename(id, newName) {
+        set(state => ({
+          timers: state.timers.map(timer => {
+            if (timer.id !== id) return timer;
 
-        return { ...timer, name: newName };
-      }),
-    }));
-  },
+            return { ...timer, name: newName };
+          }),
+        }));
+      },
 
-  reset(id) {
-    set(state => ({
-      timers: state.timers.map(timer => {
-        if (timer.id !== id) return timer;
+      reset(id) {
+        set(state => ({
+          timers: state.timers.map(timer => {
+            if (timer.id !== id) return timer;
 
-        return { ...timer, spent: 0 };
-      }),
-    }));
-  },
+            return { ...timer, spent: 0 };
+          }),
+        }));
+      },
 
-  spent() {
-    return get().timers.reduce((prev, curr) => prev + curr.spent, 0);
-  },
+      spent() {
+        return get().timers.reduce((prev, curr) => prev + curr.spent, 0);
+      },
 
-  tick(id) {
-    set(state => ({
-      timers: state.timers.map(timer => {
-        if (timer.id !== id) return timer;
+      tick(id) {
+        set(state => ({
+          timers: state.timers.map(timer => {
+            if (timer.id !== id) return timer;
 
-        return { ...timer, spent: timer.spent + 1 };
-      }),
-    }));
-  },
+            return { ...timer, spent: timer.spent + 1 };
+          }),
+        }));
+      },
 
-  timers: [],
+      timers: [],
 
-  total() {
-    return get().timers.reduce((prev, curr) => prev + curr.total, 0);
-  },
-}));
+      total() {
+        return get().timers.reduce((prev, curr) => prev + curr.total, 0);
+      },
+    }),
+    {
+      name: 'timesy-timers',
+      partialize: state => ({ timers: state.timers }),
+      skipHydration: true,
+      storage: createJSONStorage(() => localStorage),
+      version: 0,
+    },
+  ),
+);
