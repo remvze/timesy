@@ -2,21 +2,36 @@
 import '@/styles/global.css';
 
 interface Props {
-  title: string;
+  description?: string;
+  title?: string;
 }
 
-const { title } = Astro.props;
+const title = Astro.props.title || 'Timesy: A Distraction-Free Online Timer';
+const description =
+  Astro.props.description || `A Distraction-free Online Timer.`;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta content="Astro description" name="description" />
     <meta content="width=device-width" name="viewport" />
-    <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
     <meta content={Astro.generator} name="generator" />
+    <meta content="#18181b" name="theme-color" />
+    <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+
     <title>{title}</title>
+    <meta content={title} name="title" />
+    <meta content={description} name="description" />
+
+    <meta content={title} property="og:title" />
+    <meta content={description} property="og:description" />
+    <meta content="Timesy" property="og:site_name" />
+    <meta content="https://timesy.app" property="og:url" />
+    <meta content="website" property="og:type" />
+    <meta content="https://timesy.app/og.png" property="og:image" />
+
+    <meta content="summary_large_image" name="twitter:card" />
   </head>
   <body>
     <slot />
