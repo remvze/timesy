@@ -11,7 +11,7 @@ export function Footer() {
         </p>
 
         <p className={styles.line}>
-          Created by <a href="https://twitter.com/remvze">MAZE ✦</a>
+          Created by <a href="https://twitter.com/remvze">Maze ✦</a>
         </p>
       </footer>
     </Container>
