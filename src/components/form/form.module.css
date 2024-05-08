@@ -10,6 +10,7 @@
     width: 100%;
     height: 45px;
     font-weight: 500;
+    color: var(--color-neutral-50);
     cursor: pointer;
     background-color: var(--color-neutral-950);
     border: none;
