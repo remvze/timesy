@@ -1,6 +1,6 @@
 services:
   timesy:
-    build: .
+    image: ghcr.io/remvze/timesy
     logging:
       options:
         max-size: 1g
