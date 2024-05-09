@@ -80,7 +80,8 @@
           border: none;
         }
 
-        &:disabled {
+        &:disabled,
+        &.disabled {
           cursor: not-allowed;
           opacity: 0.6;
         }
@@ -101,7 +102,7 @@
       outline: none;
       transition: 0.2s;
 
-      &:disabled {
+      &.disabled {
         cursor: not-allowed;
         opacity: 0.6;
       }

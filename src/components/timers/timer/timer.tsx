@@ -5,6 +5,7 @@ import { ReverseTimer } from './reverse-timer';
 
 import { useTimers } from '@/stores/timers';
 import { useAlarm } from '@/hooks/use-alarm';
+import { useSnackbar } from '@/contexts/snackbar';
 import { padNumber } from '@/helpers/number';
 import { cn } from '@/helpers/styles';
 
@@ -33,6 +34,8 @@ export function Timer({ id }: TimerProps) {
 
   const playAlarm = useAlarm();
 
+  const showSnackbar = useSnackbar();
+
   const handleStart = () => {
     if (left > 0) setIsRunning(true);
   };
@@ -45,11 +48,17 @@ export function Timer({ id }: TimerProps) {
   };
 
   const handleReset = () => {
+    if (spent === 0) return;
+
+    if (isRunning) return showSnackbar('Please first stop the timer.');
+
     setIsRunning(false);
     reset(id);
   };
 
   const handleDelete = () => {
+    if (isRunning) return showSnackbar('Please first stop the timer.');
+
     deleteTimer(id);
   };
 
@@ -106,8 +115,11 @@ export function Timer({ id }: TimerProps) {
           />
 
           <button
-            className={cn(styles.button, styles.reset)}
-            disabled={isRunning || spent === 0}
+            className={cn(
+              styles.button,
+              styles.reset,
+              (isRunning || spent === 0) && styles.disabled,
+            )}
             onClick={handleReset}
           >
             <IoRefresh />
@@ -123,8 +135,7 @@ export function Timer({ id }: TimerProps) {
         </div>
 
         <button
-          className={styles.delete}
-          disabled={isRunning}
+          className={cn(styles.delete, isRunning && styles.disabled)}
           onClick={handleDelete}
         >
           <IoTrashOutline />
