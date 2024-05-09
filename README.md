@@ -11,5 +11,5 @@
 1. ⚡ Run multiple timers simultaneously
 1. 📝 Name timers for better management
 1. 🛸 Minimal and distraction-free
-1. 🐱‍👤 Privacy friendly without data collection
+1. ⭐ Privacy friendly; no data collection
 1. 🪐 Free, open-source, and self-hostable
