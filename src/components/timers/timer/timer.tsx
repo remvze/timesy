@@ -115,6 +115,7 @@ export function Timer({ id }: TimerProps) {
           />
 
           <button
+            aria-disabled={isRunning || spent === 0}
             className={cn(
               styles.button,
               styles.reset,
@@ -135,6 +136,7 @@ export function Timer({ id }: TimerProps) {
         </div>
 
         <button
+          aria-disabled={isRunning}
           className={cn(styles.delete, isRunning && styles.disabled)}
           onClick={handleDelete}
         >
