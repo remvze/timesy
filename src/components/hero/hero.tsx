@@ -14,8 +14,8 @@ export function Hero() {
           width={38.97}
         />
 
-        <h1 className={styles.title}>Timesy</h1>
-        <p className={styles.desc}>A distraction-free online timer.</p>
+        <h2 className={styles.title}>Timesy</h2>
+        <h1 className={styles.desc}>A distraction-free online timer.</h1>
       </Container>
     </div>
   );
