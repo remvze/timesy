@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/remvze/timesy/compare/v0.0.2...v0.0.3) (2024-05-13)
+
+
+### 🐛 Bug Fixes
+
+* add color to primary button ([f19b37f](https://github.com/remvze/timesy/commit/f19b37fec5f25fc4c35885580a796b96bf430eba))
+* typo ([5344e98](https://github.com/remvze/timesy/commit/5344e98266c319d9febac3d997448a5ac3196f8e))
+
+
+### 🚚 Chores
+
+* add contributing guide ([b3a19af](https://github.com/remvze/timesy/commit/b3a19aff551fd352cf062f47f66612e1c33febf1))
+* add features to README file ([3210879](https://github.com/remvze/timesy/commit/3210879f9833a744d60206315849eb826b8b9f6b))
+* change image ([bf4913b](https://github.com/remvze/timesy/commit/bf4913bee18f49155abf5d1b093fe626689a811c))
+* change unsupported emoji ([68168ad](https://github.com/remvze/timesy/commit/68168ad187fbc7a3a15bd00e9a5cc679d18aef05))
+
+
+### ✨ Features
+
+* add aria-disabled to disabled buttons ([ea4c269](https://github.com/remvze/timesy/commit/ea4c2695e31009ff022fa09b46f145ed14269db1))
+* add notice ([86554f6](https://github.com/remvze/timesy/commit/86554f6f918b5b95e306113e1cc627a973ad691a))
+* change headings ([211ca08](https://github.com/remvze/timesy/commit/211ca0895f3cda9f505c95aa550244cbdb2c3517))
+* implement snackbar ([3cee118](https://github.com/remvze/timesy/commit/3cee118ee8a848811ecdfb1dd9ed93da4468037f))
+
 ### [0.0.2](https://github.com/remvze/timesy/compare/v0.0.1...v0.0.2) (2024-05-08)
 
 ### 0.0.1 (2024-05-08)
