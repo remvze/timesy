@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
 import { Timer } from './timer';
+import { Notice } from './notice';
 
 import { useTimers } from '@/stores/timers';
 
@@ -29,6 +30,8 @@ export function Timers() {
       {timers.map(timer => (
         <Timer id={timer.id} key={timer.id} />
       ))}
+
+      <Notice />
     </div>
   ) : null;
 }
