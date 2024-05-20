@@ -1,0 +1,38 @@
+---
+import { Container } from './container';
+---
+
+<Container>
+  <footer class="footer">
+    <p class="line">
+      Source code on <a href="https://github.com/remvze/timesy">GitHub</a>
+    </p>
+
+    <p class="line">
+      Created by <a href="https://twitter.com/remvze">Maze ✦</a>
+    </p>
+  </footer>
+</Container>
+
+<style>
+  .footer {
+    padding: 24px 0;
+    margin-top: 24px;
+    border-top: 1px dashed var(--color-neutral-200);
+
+    & .line {
+      font-size: var(--font-sm);
+      color: var(--color-foreground-subtle);
+
+      &:not(:last-of-type) {
+        margin-bottom: 8px;
+      }
+
+      & a {
+        font-weight: 500;
+        color: var(--color-foreground);
+        text-decoration: none;
+      }
+    }
+  }
+</style>

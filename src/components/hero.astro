@@ -1,0 +1,44 @@
+---
+import { Container } from './container';
+---
+
+<div class="hero">
+  <Container>
+    <img
+      alt="Timesy Logo"
+      class="logo"
+      height={45}
+      src="/logo.svg"
+      width={38.97}
+    />
+
+    <h1 class="title">Timesy</h1>
+    <p class="desc">A distraction-free online timer.</p>
+  </Container>
+</div>
+
+<style>
+  .hero {
+    padding-top: 100px;
+    margin-bottom: 50px;
+    text-align: center;
+
+    & .logo {
+      display: block;
+      height: 45px;
+      margin: 0 auto;
+      margin-bottom: 12px;
+    }
+
+    & .title {
+      font-family: var(--font-display);
+      font-size: var(--font-2xlg);
+      font-weight: 400;
+    }
+
+    & .desc {
+      margin-top: 8px;
+      color: var(--color-foreground-subtle);
+    }
+  }
+</style>
