@@ -80,7 +80,12 @@ export const useTimers = create<State & Actions>()(
           timers: state.timers.map(timer => {
             if (timer.id !== id) return timer;
 
-            return { ...timer, spent: timer.spent + amount };
+            const updatedSpent =
+              timer.spent + amount > timer.total
+                ? timer.total
+                : timer.spent + amount;
+
+            return { ...timer, spent: updatedSpent };
           }),
         }));
       },
