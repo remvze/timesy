@@ -17,6 +17,8 @@ interface TimerProps {
 
 export function Timer({ id }: TimerProps) {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const lastActiveTimeRef = useRef<number | null>(null);
+  const lastStateRef = useRef<{ spent: number; total: number } | null>(null);
 
   const [isRunning, setIsRunning] = useState(false);
 
@@ -82,6 +84,42 @@ export function Timer({ id }: TimerProps) {
       if (intervalRef.current) clearInterval(intervalRef.current);
     }
   }, [left, isRunning, playAlarm]);
+
+  useEffect(() => {
+    const handleBlur = () => {
+      if (isRunning) {
+        lastActiveTimeRef.current = Date.now();
+        lastStateRef.current = { spent, total };
+      }
+    };
+
+    const handleFocus = () => {
+      if (isRunning && lastActiveTimeRef.current && lastStateRef.current) {
+        const elapsed = Math.floor(
+          (Date.now() - lastActiveTimeRef.current) / 1000,
+        );
+        const previousLeft =
+          lastStateRef.current.total - lastStateRef.current.spent;
+        const currentLeft = left;
+        const correctedLeft = previousLeft - elapsed;
+
+        if (correctedLeft < currentLeft) {
+          tick(id, currentLeft - correctedLeft);
+        }
+
+        lastActiveTimeRef.current = null;
+        lastStateRef.current = null;
+      }
+    };
+
+    window.addEventListener('blur', handleBlur);
+    window.addEventListener('focus', handleFocus);
+
+    return () => {
+      window.removeEventListener('blur', handleBlur);
+      window.removeEventListener('focus', handleFocus);
+    };
+  }, [isRunning, tick, id, spent, total, left]);
 
   return (
     <div className={styles.timer}>
