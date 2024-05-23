@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/remvze/timesy/compare/v0.0.3...v0.0.4) (2024-05-23)
+
+
+### ♻️ Code Refactoring
+
+* migrate to Astro components ([fe2672d](https://github.com/remvze/timesy/commit/fe2672d024ad6cd973f27ec4ea42e637b1d12581))
+* migrate to Astro components ([29cbb75](https://github.com/remvze/timesy/commit/29cbb7504afe95592400dec71b868add0253398a))
+
+
+### ✨ Features
+
+* add auto animation ([a124fd6](https://github.com/remvze/timesy/commit/a124fd6b4f1eac3e03072857851b8a77695dbbfc))
+
+
+### 🐛 Bug Fixes
+
+* correct timer for inactive tabs (wip) ([f00c5dd](https://github.com/remvze/timesy/commit/f00c5dd1b89780cea1cb6335c9a9a7ae35d79567))
+* correct timer for inactive tabs (wip) ([ee85a6c](https://github.com/remvze/timesy/commit/ee85a6c74e346be10a26b8435544ebc3417d8add))
+
 ### [0.0.3](https://github.com/remvze/timesy/compare/v0.0.2...v0.0.3) (2024-05-13)
 
 ### 🐛 Bug Fixes
