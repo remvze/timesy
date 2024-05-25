@@ -12,6 +12,16 @@ import { Container } from './container';
       professional, or just someone who needs to stay on track, Timesy can help
       you achieve your goals.
     </p>
+    <p class="desc support">
+      Enjoy Timesy?
+      <a
+        href="https://buymeacoffee.com/remvze"
+        rel="noreferrer"
+        target="_blank"
+      >
+        Support with a donation!
+      </a>
+    </p>
   </Container>
 </section>
 
@@ -29,6 +39,20 @@ import { Container } from './container';
     & .desc {
       line-height: 1.65;
       color: var(--color-foreground-subtle);
+
+      &:not(:last-of-type) {
+        margin-bottom: 12px;
+      }
+
+      &.support {
+        font-size: var(--font-sm);
+
+        & a {
+          font-weight: 500;
+          color: var(--color-foreground);
+          text-decoration: none;
+        }
+      }
     }
   }
 </style>
