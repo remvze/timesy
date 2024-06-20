@@ -22,7 +22,9 @@ export function Timer({ id }: TimerProps) {
 
   const [isRunning, setIsRunning] = useState(false);
 
-  const { name, spent, total } = useTimers(state => state.getTimer(id));
+  const { first, last, name, spent, total } = useTimers(state =>
+    state.getTimer(id),
+  );
   const tick = useTimers(state => state.tick);
   const rename = useTimers(state => state.rename);
   const reset = useTimers(state => state.reset);
@@ -138,7 +140,7 @@ export function Timer({ id }: TimerProps) {
         </div>
       </header>
 
-      <Toolbar id={id} />
+      <Toolbar first={first} id={id} last={last} />
 
       <div
         className={styles.left}

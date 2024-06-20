@@ -18,7 +18,7 @@ interface State {
 interface Actions {
   add: (timer: { name: string; total: number }) => void;
   delete: (id: string) => void;
-  getTimer: (id: string) => Timer;
+  getTimer: (id: string) => Timer & { first: boolean; last: boolean };
   moveDown: (id: string) => void;
   moveUp: (id: string) => void;
   rename: (id: string, newName: string) => void;
@@ -50,7 +50,15 @@ export const useTimers = create<State & Actions>()(
       },
 
       getTimer(id) {
-        return get().timers.filter(timer => timer.id === id)[0];
+        const timers = get().timers;
+        const timer = timers.filter(timer => timer.id === id)[0];
+        const index = timers.indexOf(timer);
+
+        return {
+          ...timer,
+          first: index === 0,
+          last: index === timers.length - 1,
+        };
       },
 
       moveDown(id) {

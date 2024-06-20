@@ -24,7 +24,12 @@
     border: none;
     transition: 0.2s;
 
-    &:hover {
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.2;
+    }
+
+    &:not(:disabled):hover {
       color: var(--color-foreground);
       background-color: var(--color-neutral-100);
     }
