@@ -138,14 +138,14 @@ export function Timer({ id }: TimerProps) {
         </div>
       </header>
 
+      <Toolbar id={id} />
+
       <div
         className={styles.left}
         tabIndex={0}
         onClick={() => setIsReversed(prev => !prev)}
         onKeyDown={() => setIsReversed(prev => !prev)}
       >
-        <Toolbar id={id} />
-
         {!isReversed ? (
           <>
             {padNumber(hours)}
