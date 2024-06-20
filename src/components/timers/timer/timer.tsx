@@ -1,6 +1,8 @@
 import { useRef, useMemo, useState, useEffect } from 'react';
 import { IoPlay, IoPause, IoRefresh, IoTrashOutline } from 'react-icons/io5';
 
+import { Toolbar } from './toolbar';
+
 import { useTimers } from '@/stores/timers';
 import { useAlarm } from '@/hooks/use-alarm';
 import { useSnackbar } from '@/contexts/snackbar';
@@ -25,8 +27,6 @@ export function Timer({ id }: TimerProps) {
   const rename = useTimers(state => state.rename);
   const reset = useTimers(state => state.reset);
   const deleteTimer = useTimers(state => state.delete);
-  const moveUp = useTimers(state => state.moveUp);
-  const moveDown = useTimers(state => state.moveDown);
 
   const left = useMemo(() => total - spent, [total, spent]);
 
@@ -144,6 +144,8 @@ export function Timer({ id }: TimerProps) {
         onClick={() => setIsReversed(prev => !prev)}
         onKeyDown={() => setIsReversed(prev => !prev)}
       >
+        <Toolbar id={id} />
+
         {!isReversed ? (
           <>
             {padNumber(hours)}
@@ -203,9 +205,6 @@ export function Timer({ id }: TimerProps) {
           <IoTrashOutline />
         </button>
       </footer>
-
-      <button onClick={() => moveUp(id)}>Up</button>
-      <button onClick={() => moveDown(id)}>Down</button>
     </div>
   );
 }
