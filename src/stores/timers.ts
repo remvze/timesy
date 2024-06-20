@@ -19,6 +19,8 @@ interface Actions {
   add: (timer: { name: string; total: number }) => void;
   delete: (id: string) => void;
   getTimer: (id: string) => Timer;
+  moveDown: (id: string) => void;
+  moveUp: (id: string) => void;
   rename: (id: string, newName: string) => void;
   reset: (id: string) => void;
   tick: (id: string, amount?: number) => void;
@@ -49,6 +51,44 @@ export const useTimers = create<State & Actions>()(
 
       getTimer(id) {
         return get().timers.filter(timer => timer.id === id)[0];
+      },
+
+      moveDown(id) {
+        set(state => {
+          const index = state.timers.findIndex(timer => timer.id === id);
+
+          if (index < state.timers.length - 1) {
+            const newTimers = [...state.timers];
+
+            [newTimers[index + 1], newTimers[index]] = [
+              newTimers[index],
+              newTimers[index + 1],
+            ];
+
+            return { timers: newTimers };
+          }
+
+          return state;
+        });
+      },
+
+      moveUp(id) {
+        set(state => {
+          const index = state.timers.findIndex(timer => timer.id === id);
+
+          if (index > 0) {
+            const newTimers = [...state.timers];
+
+            [newTimers[index - 1], newTimers[index]] = [
+              newTimers[index],
+              newTimers[index - 1],
+            ];
+
+            return { timers: newTimers };
+          }
+
+          return state;
+        });
       },
 
       rename(id, newName) {

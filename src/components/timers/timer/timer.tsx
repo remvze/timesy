@@ -27,6 +27,8 @@ export function Timer({ id }: TimerProps) {
   const rename = useTimers(state => state.rename);
   const reset = useTimers(state => state.reset);
   const deleteTimer = useTimers(state => state.delete);
+  const moveUp = useTimers(state => state.moveUp);
+  const moveDown = useTimers(state => state.moveDown);
 
   const left = useMemo(() => total - spent, [total, spent]);
 
@@ -181,6 +183,9 @@ export function Timer({ id }: TimerProps) {
           <IoTrashOutline />
         </button>
       </footer>
+
+      <button onClick={() => moveUp(id)}>Up</button>
+      <button onClick={() => moveDown(id)}>Down</button>
     </div>
   );
 }
