@@ -1,8 +1,6 @@
 import { useRef, useMemo, useState, useEffect } from 'react';
 import { IoPlay, IoPause, IoRefresh, IoTrashOutline } from 'react-icons/io5';
 
-import { ReverseTimer } from './reverse-timer';
-
 import { useTimers } from '@/stores/timers';
 import { useAlarm } from '@/hooks/use-alarm';
 import { useSnackbar } from '@/contexts/snackbar';
@@ -35,6 +33,12 @@ export function Timer({ id }: TimerProps) {
   const hours = useMemo(() => Math.floor(left / 3600), [left]);
   const minutes = useMemo(() => Math.floor((left % 3600) / 60), [left]);
   const seconds = useMemo(() => left % 60, [left]);
+
+  const [isReversed, setIsReversed] = useState(false);
+
+  const spentHours = useMemo(() => Math.floor(spent / 3600), [spent]);
+  const spentMinutes = useMemo(() => Math.floor((spent % 3600) / 60), [spent]);
+  const spentSeconds = useMemo(() => spent % 60, [spent]);
 
   const playAlarm = useAlarm();
 
@@ -134,14 +138,30 @@ export function Timer({ id }: TimerProps) {
         </div>
       </header>
 
-      <ReverseTimer spent={spent} />
-
-      <div className={styles.left}>
-        {padNumber(hours)}
-        <span>:</span>
-        {padNumber(minutes)}
-        <span>:</span>
-        {padNumber(seconds)}
+      <div
+        className={styles.left}
+        tabIndex={0}
+        onClick={() => setIsReversed(prev => !prev)}
+        onKeyDown={() => setIsReversed(prev => !prev)}
+      >
+        {!isReversed ? (
+          <>
+            {padNumber(hours)}
+            <span>:</span>
+            {padNumber(minutes)}
+            <span>:</span>
+            {padNumber(seconds)}
+          </>
+        ) : (
+          <>
+            <span>-</span>
+            {padNumber(spentHours)}
+            <span>:</span>
+            {padNumber(spentMinutes)}
+            <span>:</span>
+            {padNumber(spentSeconds)}
+          </>
+        )}
       </div>
 
       <footer className={styles.footer}>
