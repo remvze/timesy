@@ -1,7 +1,7 @@
 import { useRef, useMemo, useState, useEffect } from 'react';
 import { IoPlay, IoPause, IoRefresh, IoTrashOutline } from 'react-icons/io5';
 
-import { ReverseTimer } from './reverse-timer';
+import { Toolbar } from './toolbar';
 
 import { useTimers } from '@/stores/timers';
 import { useAlarm } from '@/hooks/use-alarm';
@@ -22,7 +22,9 @@ export function Timer({ id }: TimerProps) {
 
   const [isRunning, setIsRunning] = useState(false);
 
-  const { name, spent, total } = useTimers(state => state.getTimer(id));
+  const { first, last, name, spent, total } = useTimers(state =>
+    state.getTimer(id),
+  );
   const tick = useTimers(state => state.tick);
   const rename = useTimers(state => state.rename);
   const reset = useTimers(state => state.reset);
@@ -33,6 +35,12 @@ export function Timer({ id }: TimerProps) {
   const hours = useMemo(() => Math.floor(left / 3600), [left]);
   const minutes = useMemo(() => Math.floor((left % 3600) / 60), [left]);
   const seconds = useMemo(() => left % 60, [left]);
+
+  const [isReversed, setIsReversed] = useState(false);
+
+  const spentHours = useMemo(() => Math.floor(spent / 3600), [spent]);
+  const spentMinutes = useMemo(() => Math.floor((spent % 3600) / 60), [spent]);
+  const spentSeconds = useMemo(() => spent % 60, [spent]);
 
   const playAlarm = useAlarm();
 
@@ -132,14 +140,32 @@ export function Timer({ id }: TimerProps) {
         </div>
       </header>
 
-      <ReverseTimer spent={spent} />
+      <Toolbar first={first} id={id} last={last} />
 
-      <div className={styles.left}>
-        {padNumber(hours)}
-        <span>:</span>
-        {padNumber(minutes)}
-        <span>:</span>
-        {padNumber(seconds)}
+      <div
+        className={styles.left}
+        tabIndex={0}
+        onClick={() => setIsReversed(prev => !prev)}
+        onKeyDown={() => setIsReversed(prev => !prev)}
+      >
+        {!isReversed ? (
+          <>
+            {padNumber(hours)}
+            <span>:</span>
+            {padNumber(minutes)}
+            <span>:</span>
+            {padNumber(seconds)}
+          </>
+        ) : (
+          <>
+            <span>-</span>
+            {padNumber(spentHours)}
+            <span>:</span>
+            {padNumber(spentMinutes)}
+            <span>:</span>
+            {padNumber(spentSeconds)}
+          </>
+        )}
       </div>
 
       <footer className={styles.footer}>
