@@ -7,6 +7,6 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "types": ["vite-plugin-pwa/vanillajs", "vite-plugin-pwa/info"]
+    "types": ["vite-plugin-pwa/react", "vite-plugin-pwa/info"]
   }
 }

@@ -26,9 +26,10 @@ export default defineConfig({
         start_url: '/',
         theme_color: '#09090b',
       },
-      registerType: 'autoUpdate',
+      registerType: 'prompt',
       workbox: {
         globPatterns: ['**/*'],
+        navigateFallback: '/',
       },
     }),
   ],
