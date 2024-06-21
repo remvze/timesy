@@ -43,6 +43,7 @@
     "@types/uuid": "9.0.8",
     "@typescript-eslint/eslint-plugin": "7.7.1",
     "@typescript-eslint/parser": "7.7.1",
+    "@vite-pwa/astro": "0.4.0",
     "astro-eslint-parser": "1.0.1",
     "autoprefixer": "10.4.19",
     "commitizen": "4.3.0",
@@ -71,6 +72,7 @@
     "stylelint-config-html": "1.1.0",
     "stylelint-config-recess-order": "5.0.1",
     "stylelint-config-standard": "36.0.0",
-    "stylelint-prettier": "5.0.0"
+    "stylelint-prettier": "5.0.0",
+    "vite-plugin-pwa": "0.20.0"
   }
 }

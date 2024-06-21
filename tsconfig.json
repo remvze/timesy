@@ -6,6 +6,7 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "types": ["vite-plugin-pwa/vanillajs", "vite-plugin-pwa/info"]
   }
 }
