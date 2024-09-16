@@ -1,4 +1,4 @@
-import { useRef, useMemo, useState, useEffect } from 'react';
+import { useRef, useMemo, useState, useEffect, useCallback } from 'react';
 import { IoPlay, IoPause, IoRefresh, IoTrashOutline } from 'react-icons/io5';
 
 import { Toolbar } from './toolbar';
@@ -22,13 +22,14 @@ export function Timer({ id }: TimerProps) {
 
   const [isRunning, setIsRunning] = useState(false);
 
-  const { first, last, name, spent, total } = useTimers(state =>
+  const { autoStart, first, last, name, spent, total } = useTimers(state =>
     state.getTimer(id),
   );
   const tick = useTimers(state => state.tick);
   const rename = useTimers(state => state.rename);
   const reset = useTimers(state => state.reset);
   const deleteTimer = useTimers(state => state.delete);
+  const removeAutoStart = useTimers(state => state.removeAutoStart);
 
   const left = useMemo(() => total - spent, [total, spent]);
 
@@ -46,9 +47,9 @@ export function Timer({ id }: TimerProps) {
 
   const showSnackbar = useSnackbar();
 
-  const handleStart = () => {
+  const handleStart = useCallback(() => {
     if (left > 0) setIsRunning(true);
-  };
+  }, [left]);
 
   const handlePause = () => setIsRunning(false);
 
@@ -128,6 +129,13 @@ export function Timer({ id }: TimerProps) {
       window.removeEventListener('focus', handleFocus);
     };
   }, [isRunning, tick, id, spent, total, left]);
+
+  useEffect(() => {
+    if (autoStart) {
+      handleStart();
+      removeAutoStart(id);
+    }
+  }, [autoStart, handleStart, removeAutoStart, id]);
 
   return (
     <div className={styles.timer}>

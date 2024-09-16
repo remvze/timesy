@@ -11,6 +11,7 @@ export function Form() {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(10);
   const [seconds, setSeconds] = useState(0);
+  const [autoStart, setAutoStart] = useState(false);
 
   const totalSeconds = useMemo(
     () => hours * 60 * 60 + minutes * 60 + seconds,
@@ -25,6 +26,7 @@ export function Form() {
     if (totalSeconds === 0) return;
 
     add({
+      autoStart,
       name,
       total: totalSeconds,
     });
@@ -87,6 +89,17 @@ export function Form() {
               </option>
             ))}
         </Field>
+      </div>
+
+      <div className={styles.autoStart}>
+        <label>
+          <input
+            checked={autoStart}
+            type="checkbox"
+            onChange={() => setAutoStart(prev => !prev)}
+          />
+          Auto start the timer.
+        </label>
       </div>
 
       <button className={styles.button} type="submit">

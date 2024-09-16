@@ -3,6 +3,7 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 interface Timer {
+  autoStart?: boolean;
   id: string;
   name: string;
   spent: number;
@@ -16,11 +17,12 @@ interface State {
 }
 
 interface Actions {
-  add: (timer: { name: string; total: number }) => void;
+  add: (timer: { autoStart: boolean; name: string; total: number }) => void;
   delete: (id: string) => void;
   getTimer: (id: string) => Timer & { first: boolean; last: boolean };
   moveDown: (id: string) => void;
   moveUp: (id: string) => void;
+  removeAutoStart: (id: string) => void;
   rename: (id: string, newName: string) => void;
   reset: (id: string) => void;
   tick: (id: string, amount?: number) => void;
@@ -29,10 +31,11 @@ interface Actions {
 export const useTimers = create<State & Actions>()(
   persist(
     (set, get) => ({
-      add({ name, total }) {
+      add({ autoStart, name, total }) {
         set(state => ({
           timers: [
             {
+              autoStart: !!autoStart,
               id: uuid(),
               name,
               spent: 0,
@@ -99,6 +102,18 @@ export const useTimers = create<State & Actions>()(
         });
       },
 
+      removeAutoStart(id) {
+        set(state => ({
+          timers: state.timers.map(timer => {
+            if (timer.id !== id) return timer;
+
+            delete timer.autoStart;
+
+            return timer;
+          }),
+        }));
+      },
+
       rename(id, newName) {
         set(state => ({
           timers: state.timers.map(timer => {
@@ -146,7 +161,9 @@ export const useTimers = create<State & Actions>()(
     }),
     {
       name: 'timesy-timers',
-      partialize: state => ({ timers: state.timers }),
+      partialize: state => ({
+        timers: state.timers,
+      }),
       skipHydration: true,
       storage: createJSONStorage(() => localStorage),
       version: 0,

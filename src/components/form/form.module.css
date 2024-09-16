@@ -1,7 +1,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  row-gap: 28px;
+  row-gap: 24px;
 
   & .button {
     display: flex;
@@ -25,4 +25,12 @@
   column-gap: 12px;
   align-items: flex-end;
   justify-content: space-between;
+}
+
+.autoStart {
+  color: var(--color-foreground-subtle);
+
+  & input {
+    margin-right: 8px;
+  }
 }
