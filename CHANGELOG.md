@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.0](https://github.com/remvze/timesy/compare/v0.0.6...v0.1.0) (2024-09-16)
+
+
+### 🚚 Chores
+
+* update README file ([02b6d4c](https://github.com/remvze/timesy/commit/02b6d4c6a352b4870e906b45ff8f5a4b91d3e85b))
+
+
+### 💄 Styling
+
+* replace toolbar ([e3a77a4](https://github.com/remvze/timesy/commit/e3a77a48203f1158418009f256d729c615f0ec97))
+
+
+### 🐛 Bug Fixes
+
+* remove pwa file ([e335527](https://github.com/remvze/timesy/commit/e3355279b419e22bf00af3ba98fc9fb5339e84e7))
+* render reload modal only in the browser ([2b263e2](https://github.com/remvze/timesy/commit/2b263e22538d2181ff818648bc46fafcc6be41bf))
+
+
+### ✨ Features
+
+* add auto start option ([45ec740](https://github.com/remvze/timesy/commit/45ec740b48fc23b7f7577b836bc5197fb7662a67))
+* add basic moving mechanism ([161b455](https://github.com/remvze/timesy/commit/161b45574324e4d91fd2689a588185503c0bab13))
+* add basic pwa ([4d9de85](https://github.com/remvze/timesy/commit/4d9de851436ba24e4915926981afe9c5fae2bf4f))
+* add disabled state to toolbar ([e362dac](https://github.com/remvze/timesy/commit/e362dac3f7090f387582bca30dd6cea98ea4e751))
+* add shortcuts ([21e4388](https://github.com/remvze/timesy/commit/21e4388f3c56621f73e343a7909681b0d484f4da))
+* add toolbar to timer ([c852e3b](https://github.com/remvze/timesy/commit/c852e3b3390b6070e48878ff22e2cda6dbaed9ae))
+* change to reload prompt ([1c6726f](https://github.com/remvze/timesy/commit/1c6726f8349c416c36d7a783a806931648fc7f62))
+* replace reverse timer ([07fbfbe](https://github.com/remvze/timesy/commit/07fbfbec9de5683ab4bfcb23da0c3988c54aa6d8))
+
 ### [0.0.6](https://github.com/remvze/timesy/compare/v0.0.5...v0.0.6) (2024-05-25)
 
 ### 0.0.5 (2024-05-25)
