@@ -34,8 +34,8 @@ export function Timers() {
             )}
           </header>
 
-          {timers.map(timer => (
-            <Timer id={timer.id} key={timer.id} />
+          {timers.map((timer, index) => (
+            <Timer id={timer.id} index={index} key={timer.id} />
           ))}
 
           <Notice />

@@ -1,5 +1,6 @@
 import { useRef, useMemo, useState, useEffect, useCallback } from 'react';
 import { IoPlay, IoPause, IoRefresh, IoTrashOutline } from 'react-icons/io5';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 import { Toolbar } from './toolbar';
 
@@ -13,9 +14,10 @@ import styles from './timer.module.css';
 
 interface TimerProps {
   id: string;
+  index: number;
 }
 
-export function Timer({ id }: TimerProps) {
+export function Timer({ id, index }: TimerProps) {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const lastActiveTimeRef = useRef<number | null>(null);
   const lastStateRef = useRef<{ spent: number; total: number } | null>(null);
@@ -137,6 +139,14 @@ export function Timer({ id }: TimerProps) {
     }
   }, [autoStart, handleStart, removeAutoStart, id]);
 
+  useHotkeys(`shift+${index + 1}`, () => handleToggle(), {
+    enabled: index < 9,
+  });
+
+  useHotkeys(`shift+alt+${index + 1}`, () => handleReset(), {
+    enabled: index < 9,
+  });
+
   return (
     <div className={styles.timer}>
       <header className={styles.header}>
@@ -215,6 +225,15 @@ export function Timer({ id }: TimerProps) {
           <IoTrashOutline />
         </button>
       </footer>
+
+      {index < 9 && (
+        <div className={styles.shortcut}>
+          <span className={styles.key}>Shift</span>
+          <span className={styles.text}>+</span>
+          <span className={styles.key}>{index + 1}</span>
+          <span className={styles.text}>to toggle play.</span>
+        </div>
+      )}
     </div>
   );
 }
