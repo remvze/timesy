@@ -3,20 +3,38 @@
   flex-direction: column;
   row-gap: 24px;
 
-  & .button {
+  & .buttons {
     display: flex;
+    column-gap: 8px;
     align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 45px;
-    font-weight: 500;
-    color: var(--color-neutral-50);
-    cursor: pointer;
-    background-color: var(--color-neutral-950);
-    border: none;
-    border-radius: 8px;
-    outline: none;
-    box-shadow: inset 0 -3px 0 var(--color-neutral-700);
+
+    & button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      font-weight: 500;
+      color: var(--color-foreground-subtle);
+      cursor: pointer;
+      background-color: var(--color-neutral-200);
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      box-shadow: inset 0 -3px 0 var(--color-neutral-100);
+      transition: 0.2s;
+
+      &:not(.primary):hover {
+        color: var(--color-foreground);
+      }
+
+      &.primary {
+        flex-grow: 1;
+        color: var(--color-neutral-50);
+        background-color: var(--color-neutral-950);
+        box-shadow: inset 0 -3px 0 var(--color-neutral-700);
+      }
+    }
   }
 }
 
@@ -32,5 +50,44 @@
 
   & input {
     margin-right: 8px;
+  }
+}
+
+.settings {
+  & h2 {
+    margin-bottom: 20px;
+    font-family: var(--font-display);
+    font-size: var(--font-md);
+  }
+
+  & .field {
+    & label {
+      display: block;
+      margin-bottom: 4px;
+      font-size: var(--font-sm);
+      font-weight: 500;
+      color: var(--color-foreground);
+    }
+
+    & input {
+      display: block;
+      width: 100%;
+      min-width: 0;
+    }
+  }
+
+  & .notice {
+    padding: 12px;
+    margin-top: 20px;
+    font-size: var(--font-sm);
+    line-height: 1.6;
+    color: var(--color-foreground-subtle);
+    border: 1px dashed var(--color-neutral-200);
+    border-radius: 4px;
+
+    & strong {
+      font-weight: 500;
+      color: var(--color-foreground);
+    }
   }
 }

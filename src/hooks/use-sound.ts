@@ -44,7 +44,17 @@ export function useSound(src: string, volume: number = 1) {
     if (sound) sound.pause();
   }, [sound]);
 
-  const control = useMemo(() => ({ pause, play, stop }), [play, stop, pause]);
+  const setVolume = useCallback(
+    (volume: number) => {
+      if (sound) sound.volume(volume);
+    },
+    [sound],
+  );
+
+  const control = useMemo(
+    () => ({ pause, play, setVolume, stop }),
+    [play, stop, pause, setVolume],
+  );
 
   return control;
 }
