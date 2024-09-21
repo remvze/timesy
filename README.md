@@ -2,7 +2,7 @@
   <img src="/assets/banner.svg" alt="Timesy Logo Banner" />
   <h2>Timesy ⏳️</h2>
   <p>A distraction-free online timer.</p>
-  <a href="https://timesy.app">Visit <strong>Timesy</strong></a> | <a href="https://buymeacoffee.com/remvze">Buy Me a Coffee</a>
+  <a href="https://timesy.mvze.net">Visit <strong>Timesy</strong></a> | <a href="https://buymeacoffee.com/remvze">Buy Me a Coffee</a>
 </div>
 
 ## Features
