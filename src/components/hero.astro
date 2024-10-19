@@ -1,9 +1,17 @@
 ---
+import { Velustro } from 'uvcanvas';
+
 import { Container } from './container';
 ---
 
-<div class="hero">
-  <Container>
+<Container fullWidth>
+  <div class="hero">
+    <div class="effect">
+      <Velustro client:load />
+      <div class="overlay"></div>
+      <div class="noise"></div>
+    </div>
+
     <img
       alt="Timesy Logo"
       class="logo"
@@ -12,16 +20,54 @@ import { Container } from './container';
       width={38.97}
     />
 
-    <h2 class="title">Timesy</h2>
+    <h2 class="title"><span>Timesy</span></h2>
     <h1 class="desc">A distraction-free online timer.</h1>
-  </Container>
-</div>
+  </div>
+</Container>
 
 <style>
   .hero {
-    padding-top: 100px;
-    margin-bottom: 50px;
+    position: relative;
+    padding: 100px 0 30px;
+    margin-top: 24px;
+    margin-bottom: 20px;
+    overflow: hidden;
     text-align: center;
+    border-top: 1px solid var(--color-neutral-200);
+    border-radius: 36px 36px 0 0;
+
+    & .effect {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+
+      & .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          rgb(0 0 0 / 87.5%),
+          var(--color-neutral-50)
+        );
+        backdrop-filter: grayscale(100%);
+      }
+
+      & .noise {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent url('/noise.png') repeat 0 0;
+        mix-blend-mode: lighten;
+        opacity: 0.4;
+      }
+    }
 
     & .logo {
       display: block;
@@ -34,6 +80,16 @@ import { Container } from './container';
       font-family: var(--font-display);
       font-size: var(--font-2xlg);
       font-weight: 400;
+
+      & span {
+        background: linear-gradient(
+          135deg,
+          var(--color-foreground),
+          var(--color-neutral-600)
+        );
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
     }
 
     & .desc {

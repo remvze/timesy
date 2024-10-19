@@ -2,4 +2,9 @@
   width: 90%;
   max-width: 420px;
   margin: 0 auto;
+
+  &.fullWidth {
+    width: 100%;
+    max-width: 500px;
+  }
 }
