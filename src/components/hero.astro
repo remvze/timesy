@@ -12,13 +12,9 @@ import { Container } from './container';
       <div class="noise"></div>
     </div>
 
-    <img
-      alt="Timesy Logo"
-      class="logo"
-      height={45}
-      src="/logo.svg"
-      width={38.97}
-    />
+    <div class="logo">
+      <img alt="Timesy Logo" height={45} src="/logo.svg" width={38.97} />
+    </div>
 
     <h2 class="title"><span>Timesy</span></h2>
     <h1 class="desc">A distraction-free online timer.</h1>
@@ -29,12 +25,9 @@ import { Container } from './container';
   .hero {
     position: relative;
     padding: 100px 0 30px;
-    margin-top: 24px;
     margin-bottom: 20px;
     overflow: hidden;
     text-align: center;
-    border-top: 1px solid var(--color-neutral-200);
-    border-radius: 36px 36px 0 0;
 
     & .effect {
       position: absolute;
@@ -43,6 +36,27 @@ import { Container } from './container';
       z-index: -1;
       width: 100%;
       height: 100%;
+
+      &::before,
+      &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        width: 1px;
+        height: 100%;
+        content: '';
+        background: linear-gradient(
+          transparent,
+          var(--color-neutral-100),
+          transparent
+        );
+      }
+
+      &::after {
+        right: 0;
+        left: unset;
+      }
 
       & .overlay {
         position: absolute;
@@ -66,14 +80,29 @@ import { Container } from './container';
         background: transparent url('/noise.png') repeat 0 0;
         mix-blend-mode: lighten;
         opacity: 0.4;
+        mask-image: linear-gradient(#000, transparent);
       }
     }
 
     & .logo {
-      display: block;
-      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
       margin: 0 auto;
       margin-bottom: 12px;
+      background: linear-gradient(
+        var(--color-neutral-50),
+        var(--color-neutral-100)
+      );
+      border: 1px solid var(--color-neutral-200);
+      border-radius: 16px;
+      box-shadow: inset 0 -1px 0 var(--color-neutral-300);
+
+      & img {
+        height: 28px;
+      }
     }
 
     & .title {
