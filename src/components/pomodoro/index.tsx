@@ -224,10 +224,10 @@ export function Settings({ onChange, times }: SettingsProps) {
   };
 
   return (
-    <>
-      <h2>Change Times</h2>
+    <div className={styles.setting}>
+      <h2 className={styles.title}>Change Times</h2>
 
-      <form onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <Field
           id="pomodoro"
           label="Pomodoro"
@@ -247,14 +247,16 @@ export function Settings({ onChange, times }: SettingsProps) {
           onChange={handleChange('long')}
         />
 
-        <div>
+        <div className={styles.buttons}>
           <button type="button" onClick={handleCancel}>
             Cancel
           </button>
-          <button type="submit">Save</button>
+          <button className={styles.primary} type="submit">
+            Save
+          </button>
         </div>
       </form>
-    </>
+    </div>
   );
 }
 
@@ -267,11 +269,12 @@ interface FieldProps {
 
 function Field({ id, label, onChange, value }: FieldProps) {
   return (
-    <div>
-      <label htmlFor={id}>
+    <div className={styles.field}>
+      <label className={styles.label} htmlFor={id}>
         {label} <span>(minutes)</span>
       </label>
       <input
+        className={styles.input}
         max={120}
         min={1}
         required
