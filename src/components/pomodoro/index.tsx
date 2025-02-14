@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
+import { IoRefresh, IoSettingsOutline } from 'react-icons/io5';
 
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import { useAlarm } from '@/hooks/use-alarm';
@@ -19,7 +20,7 @@ export function PomodoroTimer() {
     () => ({
       long: 15 * 60,
       pomodoro: 25 * 60,
-      short: 30,
+      short: 5 * 60,
     }),
     [],
   );
@@ -112,12 +113,19 @@ export function PomodoroTimer() {
         <Timer completed={completions[selectedTab] || 0} timer={timer} />
 
         <div>
-          <div>
-            <button onClick={toggleRunning}>
+          <div className={styles.buttons}>
+            <button className={styles.play} onClick={toggleRunning}>
               {isRunning ? 'Pause' : 'Play'}
             </button>
-            <button onClick={restart}>Restart</button>
-            <button onClick={() => setShowSettings(true)}>Settings</button>
+            <button className={styles.reset} onClick={restart}>
+              <IoRefresh />
+            </button>
+            <button
+              className={styles.setting}
+              onClick={() => setShowSettings(true)}
+            >
+              <IoSettingsOutline />
+            </button>
           </div>
         </div>
       </div>
