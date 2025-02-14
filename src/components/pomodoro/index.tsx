@@ -204,8 +204,8 @@ export function Settings({ onChange, times }: SettingsProps) {
     const newValues: Record<string, number> = {};
 
     Object.keys(values).forEach(name => {
-      newValues[name] =
-        typeof values[name] === 'number' ? values[name] : times[name];
+      const value = values[name];
+      newValues[name] = typeof value === 'number' ? value : times[name];
     });
 
     onChange(newValues);
