@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/remvze/timesy/compare/v1.0.0...v1.0.1) (2025-02-15)
+
+
+### ✨ Features
+
+* add timer to the title ([ac49f3d](https://github.com/remvze/timesy/commit/ac49f3d762b66b656d87c8e8eeed87f8cce3f798))
+
 ## [1.0.0](https://github.com/remvze/timesy/compare/v0.0.6...v1.0.0) (2025-02-15)
 
 
