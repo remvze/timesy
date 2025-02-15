@@ -133,6 +133,7 @@ export function PomodoroTimer() {
       <Modal show={showSettings} onClose={() => setShowSettings(false)}>
         <Settings
           times={times}
+          onCancel={() => setShowSettings(false)}
           onChange={times => {
             setShowSettings(false);
             setTimes(times);
@@ -188,11 +189,12 @@ export function Timer({ completed, timer }: TimerProps) {
 }
 
 interface SettingsProps {
+  onCancel: () => void;
   onChange: (newTimes: Record<string, number>) => void;
   times: Record<string, number>;
 }
 
-export function Settings({ onChange, times }: SettingsProps) {
+export function Settings({ onCancel, onChange, times }: SettingsProps) {
   const [values, setValues] = useState<Record<string, number | string>>(times);
 
   useEffect(() => {
@@ -221,6 +223,8 @@ export function Settings({ onChange, times }: SettingsProps) {
 
   const handleCancel = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
+
+    onCancel();
   };
 
   return (
