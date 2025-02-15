@@ -106,6 +106,17 @@ export function PomodoroTimer() {
     setTimer(time);
   };
 
+  useEffect(() => {
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+
+    document.title = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} // Timesy`;
+
+    return () => {
+      document.title = 'Timesy: A Distraction-Free Online Timer';
+    };
+  }, [timer]);
+
   return (
     <>
       <div>
