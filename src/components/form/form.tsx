@@ -107,7 +107,7 @@ export function Form() {
               type="checkbox"
               onChange={() => setAutoStart(prev => !prev)}
             />
-            Auto start the timer.
+            <span>Auto start the timer.</span>
           </label>
         </div>
 

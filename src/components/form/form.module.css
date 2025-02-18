@@ -46,10 +46,20 @@
 }
 
 .autoStart {
+  user-select: none;
   color: var(--color-foreground-subtle);
 
+  & label {
+    display: flex;
+    align-items: center;
+    max-width: max-content;
+  }
+
   & input {
+    width: 14px;
+    height: 14px;
     margin-right: 8px;
+    accent-color: var(--color-foreground-subtler);
   }
 }
 
@@ -73,6 +83,7 @@
       display: block;
       width: 100%;
       min-width: 0;
+      accent-color: var(--color-foreground-subtler);
     }
   }
 

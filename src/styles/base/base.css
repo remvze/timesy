@@ -8,7 +8,10 @@
 }
 
 html {
+  color-scheme: dark;
+  scrollbar-width: thin;
   scroll-behavior: smooth;
+  scrollbar-gutter: stable both-edges;
 }
 
 body {
@@ -21,4 +24,8 @@ body {
 ::selection {
   color: var(--color-foreground);
   background-color: var(--color-neutral-300);
+}
+
+select {
+  scrollbar-width: thin;
 }
