@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.2](https://github.com/remvze/timesy/compare/v1.0.1...v1.0.2) (2025-02-19)
+
+
+### 💄 Styling
+
+* enforce dark color scheme ([f47eb4d](https://github.com/remvze/timesy/commit/f47eb4d9b1902509598f1f533f380f424778931b))
+
+
+### ✨ Features
+
+* keep timer name on tab switch ([9c24806](https://github.com/remvze/timesy/commit/9c24806f45a1c334b1aa31ddb3cf6051ddb53ec1))
+
 ### [1.0.1](https://github.com/remvze/timesy/compare/v1.0.0...v1.0.1) (2025-02-15)
 
 
