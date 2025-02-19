@@ -9,13 +9,17 @@ import { useTimers } from '@/stores/timers';
 import styles from './form.module.css';
 import { useSettings } from '@/stores/settings';
 
-export function Form() {
+interface FormProps {
+  onTimerNameChange: (name: string) => void;
+  timerName: string;
+}
+
+export function Form({ onTimerNameChange, timerName }: FormProps) {
   const [showSettings, setShowSettings] = useState(false);
 
   const volume = useSettings(state => state.volume);
   const setVolume = useSettings(state => state.setVolume);
 
-  const [name, setName] = useState('');
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(10);
   const [seconds, setSeconds] = useState(0);
@@ -35,11 +39,11 @@ export function Form() {
 
     add({
       autoStart,
-      name,
+      name: timerName,
       total: totalSeconds,
     });
 
-    setName('');
+    onTimerNameChange('');
   };
 
   return (
@@ -49,8 +53,8 @@ export function Form() {
           label="Timer Name"
           optional
           type="text"
-          value={name}
-          onChange={value => setName(value as string)}
+          value={timerName}
+          onChange={value => onTimerNameChange(value as string)}
         />
 
         <div className={styles.timeFields}>
@@ -107,7 +111,7 @@ export function Form() {
               type="checkbox"
               onChange={() => setAutoStart(prev => !prev)}
             />
-            Auto start the timer.
+            <span>Auto start the timer.</span>
           </label>
         </div>
 

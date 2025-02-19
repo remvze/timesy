@@ -12,6 +12,7 @@ import { cn } from '@/helpers/styles';
 
 export function App() {
   const [tab, setTab] = useState('countdown');
+  const [timerName, setTimerName] = useState('');
 
   return (
     <SnackbarProvider>
@@ -41,7 +42,7 @@ export function App() {
 
           {tab === 'countdown' && (
             <>
-              <Form />
+              <Form timerName={timerName} onTimerNameChange={setTimerName} />
               <Timers />
             </>
           )}
