@@ -24,9 +24,13 @@ export function Timer({ id, index }: TimerProps) {
 
   const [isRunning, setIsRunning] = useState(false);
 
-  const { autoStart, first, last, name, spent, total } = useTimers(state =>
-    state.getTimer(id),
-  );
+  const autoStart = useTimers(state => state.getTimer(id)?.autoStart);
+  const first = useTimers(state => state.getTimer(id)?.first);
+  const last = useTimers(state => state.getTimer(id)?.last);
+  const name = useTimers(state => state.getTimer(id)?.name);
+  const spent = useTimers(state => state.getTimer(id)?.spent);
+  const total = useTimers(state => state.getTimer(id)?.total);
+
   const tick = useTimers(state => state.tick);
   const rename = useTimers(state => state.rename);
   const reset = useTimers(state => state.reset);
